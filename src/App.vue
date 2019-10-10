@@ -2,10 +2,10 @@
   <div class="data">
     <div class="header">
       <h1>Brewdog Beer App</h1>
-      <h4>Choose a beer to find out more about it</h4>
     </div>
     <div class="page-container">
       <div class="beer-list">
+        <sub>Choose a beer to find out more about it</sub>
         <beer-selecter :beers="beers"></beer-selecter>
       </div>
       <br>
@@ -44,12 +44,22 @@ export default {
     })
 
     eventBus.$on('add-favourite-beer', (beer) => {
-      this.favouriteBeers.push(beer);
+      if (!this.favouriteBeers.includes(beer)){
+        this.favouriteBeers.push(beer);
+      } else {
+        alert('You have already favourited this beer!');
+      }
     })
 
     eventBus.$on('remove-favourite-beer', (beer) => {
       let position = this.favouriteBeers.indexOf(beer);
-      this.favouriteBeers.splice(position, 1);
+      let del = confirm('Are you sure you want to remove this?')
+      if (del) {
+        this.favouriteBeers.splice(position, 1);
+        alert('Item Removed!')
+      } else {
+        alert('Not Removed!')
+      };
     })
   },
   components: {
@@ -61,4 +71,27 @@ export default {
 </script>
 
 <style lang="css" scoped>
+body {
+  background-color: azure;
+}
+
+.page-container {
+  font-family: helvetica;
+}
+.header {
+  text-align: center;
+  background-color: darkslategrey;
+  padding: 0.75rem;
+  width: 100vmax;
+  margin-left: -0.5rem;
+  margin-top: -0.5rem;
+  color: aliceblue;
+}
+
+.beer-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+}
 </style>
