@@ -3,9 +3,12 @@
     <div class="beer-info">
       <h3>{{ beer.name }}</h3>
       <p>"{{ beer.tagline }}"</p>
-      <p>Description: {{ beer.description }}</p>
-      <p>First Brewed: {{ beer.first_brewed }}</p>
-      <p>ABV: {{ beer.abv }}%</p>
+      <p><b>Description: </b></p>
+      <p>{{ beer.description }}</p>
+      <p><b>First Brewed: </b></p>
+      <p>{{ beer.first_brewed }}</p>
+      <p><b>ABV: </b></p>
+      <p>{{ beer.abv }}%</p>
     </div>
     <div class="ingredient-panel">
       <h3 id="ingredient-title">Ingredients</h3>
@@ -32,7 +35,7 @@
     </div>
     <br>
     <div class="add-btn">
-      <button type="button" name="button" @click="addBeerToFav" v-model="beer">Add to Favourites</button>
+      <button id="add-btn" type="button" name="button" @click="addBeerToFav" v-model="beer">Add to Favourites</button>
     </div>
   </div>
 </template>
@@ -101,6 +104,11 @@ export default {
 .add-btn {
   display: flex;
   justify-content: center;
+}
+
+#add-btn {
+  color: black;
+  background-color: aliceblue;
 }
 
 </style>
