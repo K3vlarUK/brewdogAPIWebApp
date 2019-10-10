@@ -9,8 +9,11 @@
         <beer-selecter :beers="beers"></beer-selecter>
       </div>
       <br>
-      <div class="beer-detail">
+      <div class="beer-details">
         <beer-detail :beer="selectedBeer"></beer-detail>
+      </div>
+      <div class="favourite-beers-list">
+        <favourite-beers :beers="favouriteBeers"></favourite-beers>
       </div>
     </div>
   </div>
@@ -20,13 +23,15 @@
 import {eventBus} from './main.js';
 import BeerSelect from './components/BeerSelect.vue';
 import BeerDetail from './components/BeerDetail.vue';
+import FavouriteBeers from './components/FavouriteBeers.vue';
 
 export default {
   name: 'app',
   data() {
     return {
       beers: [],
-      selectedBeer: null
+      selectedBeer: null,
+      favouriteBeers: []
     };
   },
   mounted() {
@@ -37,10 +42,20 @@ export default {
     eventBus.$on('beer-selected', (beer) => {
       this.selectedBeer = beer;
     })
+
+    eventBus.$on('add-favourite-beer', (beer) => {
+      this.favouriteBeers.push(beer);
+    })
+
+    eventBus.$on('remove-favourite-beer', (beer) => {
+      let position = this.favouriteBeers.indexOf(beer);
+      this.favouriteBeers.splice(position, 1);
+    })
   },
   components: {
     "beer-selecter": BeerSelect,
-    "beer-detail": BeerDetail
+    "beer-detail": BeerDetail,
+    "favourite-beers": FavouriteBeers
   }
 }
 </script>
