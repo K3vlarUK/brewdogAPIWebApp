@@ -1,6 +1,7 @@
 <template lang="html">
   <div>
     <select @change="selectBeer" v-model="beer">
+      <option disabled value="">Select Beer</option>
       <option v-for="beer in beers" :value="beer">
         {{ beer.name }}
       </option>

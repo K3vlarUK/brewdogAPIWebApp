@@ -1,17 +1,25 @@
 <template lang="html">
-<div class="data">
-  <div class="header">
-    <h1>Brewdog Beer App</h1>
+  <div class="data">
+    <div class="header">
+      <h1>Brewdog Beer App</h1>
+      <h4>Choose a beer to find out more about it</h4>
+    </div>
+    <div class="page-container">
+      <div class="beer-list">
+        <beer-selecter :beers="beers"></beer-selecter>
+      </div>
+      <br>
+      <div class="beer-detail">
+        <beer-detail :beer="selectedBeer"></beer-detail>
+      </div>
+    </div>
   </div>
-  <div class="page-container">
-    <beer-selecter :beers="beers"></beer-selecter>
-  </div>
-</div>
 </template>
 
 <script>
 import {eventBus} from './main.js';
 import BeerSelect from './components/BeerSelect.vue';
+import BeerDetail from './components/BeerDetail.vue';
 
 export default {
   name: 'app',
@@ -31,7 +39,8 @@ export default {
     })
   },
   components: {
-    "beer-selecter": BeerSelect
+    "beer-selecter": BeerSelect,
+    "beer-detail": BeerDetail
   }
 }
 </script>
